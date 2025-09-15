@@ -18,8 +18,8 @@ jobs:
       - name: Install dependencies
         run: npm ci --legacy-peer-deps
 
-      - name: Build applications
-        run: npx nx run-many -t build
+      # - name: Build applications
+      #   run: npx nx run-many -t build
 
       - name: Docker build for all services
         run: npx nx run-many -t docker:build --parallel --max-parallel=2        
@@ -31,7 +31,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
 
       - name: Build and tag Docker images
-        run: npx nx release version --dockerVersion=production-1234
+        run: npx nx release version --dockerVersion=production-1235
 
       - name: Publish Docker images
         run: npx nx release publish
