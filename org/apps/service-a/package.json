@@ -84,7 +84,7 @@
     },
     "release": {
       "docker": {
-        "repositoryName": "hoangphi076/text-nx/service-a"
+        "repositoryName": "hoangphi076/text-nx"
       }
     }
   },
