@@ -1,0 +1,26 @@
+{
+  "name": "@test-push-cd/service-a-e2e",
+  "version": "0.0.1",
+  "private": true,
+  "nx": {
+    "implicitDependencies": [
+      "@test-push-cd/service-a"
+    ],
+    "targets": {
+      "e2e": {
+        "executor": "@nx/jest:jest",
+        "outputs": [
+          "{projectRoot}/test-output/jest/coverage"
+        ],
+        "options": {
+          "jestConfig": "apps/service-a-e2e/jest.config.ts",
+          "passWithNoTests": true
+        },
+        "dependsOn": [
+          "@test-push-cd/service-a:build",
+          "@test-push-cd/service-a:serve"
+        ]
+      }
+    }
+  }
+}

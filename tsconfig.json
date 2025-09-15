@@ -4,6 +4,9 @@
   "files": [],
   "references": [
     {
+      "path": "./apps/service-a-e2e"
+    },
+    {
       "path": "./apps/service-a"
     }
   ]

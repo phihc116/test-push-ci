@@ -1,5 +1,5 @@
 {
-  "name": "service-a",
+  "name": "@test-push-cd/service-a",
   "version": "0.0.1",
   "private": true,
   "nx": {
@@ -63,15 +63,15 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@org/service-a:build",
+          "buildTarget": "@test-push-cd/service-a:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@org/service-a:build:development"
+            "buildTarget": "@test-push-cd/service-a:build:development"
           },
           "production": {
-            "buildTarget": "@org/service-a:build:production"
+            "buildTarget": "@test-push-cd/service-a:build:production"
           }
         }
       },
@@ -86,7 +86,7 @@
       "docker": {
         "repositoryName": "hoangphi076/text-nx"
       }
-    }
+    }    
   },
   "dependencies": {}
 }

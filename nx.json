@@ -3,14 +3,10 @@
   "defaultBase": "master",
   "namedInputs": {
     "default": ["{projectRoot}/**/*", "sharedGlobals"],
-    "production": [
-      "default",
-      "!{projectRoot}/.eslintrc.json",
-      "!{projectRoot}/eslint.config.mjs"
-    ],
+    "production": ["default"],
     "sharedGlobals": ["{workspaceRoot}/.github/workflows/ci.yml"]
   },
-  "nxCloudId": "68c7b03a45069b1edecd3653",
+  "nxCloudId": "68c8a1c40d3c891fc1506544",
   "plugins": [
     {
       "plugin": "@nx/js/typescript",
@@ -38,12 +34,6 @@
       }
     },
     {
-      "plugin": "@nx/eslint/plugin",
-      "options": {
-        "targetName": "lint"
-      }
-    },
-    {
       "plugin": "@nx/docker",
       "options": {
         "buildTarget": "docker:build",
@@ -55,7 +45,7 @@
     "releaseTagPattern": "release/{projectName}/{version}",
     "groups": {
       "apps": {
-        "projects": ["service-a"], 
+        "projects": ["service-a"],
         "projectsRelationship": "independent",
         "docker": {
           "skipVersionActions": true,
