@@ -6,7 +6,7 @@ function bumpVersion(version, level) {
   return `${major}.${minor}.${patch}`;
 }
 
-async function bumpTag({ github, context, service, env, updateLevel }) {
+export async function bumpTag({ github, context, service, env, updateLevel }) {
   const { data: tags } = await github.rest.repos.listTags({
     owner: context.repo.owner,
     repo: context.repo.repo,
@@ -41,5 +41,4 @@ async function bumpTag({ github, context, service, env, updateLevel }) {
 
   return { latestTag, newTag };
 }
- 
-module.exports = bumpTag;
+  
