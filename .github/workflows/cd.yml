@@ -32,6 +32,8 @@ jobs:
           echo "Deploying Service A"
           echo "Environment: ${{ github.event.inputs.environment }}"
           echo "Update level: ${{ github.event.inputs.update_level }}"
+      - name: Checkout repo
+        uses: actions/checkout@v4          
       - name: Run bump-tag.js
         run: node .github/scripts/bump-tag.js
         env:
@@ -48,6 +50,8 @@ jobs:
           echo "Deploying Service B"
           echo "Environment: ${{ github.event.inputs.environment }}"
           echo "Update level: ${{ github.event.inputs.update_level }}"
+      - name: Checkout repo
+        uses: actions/checkout@v4          
       - name: Run bump-tag.js
         run: node .github/scripts/bump-tag.js
         env:
