@@ -17,17 +17,15 @@ export async function bumpTag({ github, context, service, env, updateLevel }) {
 
   const filtered = tags
     .map(t => t.name)
-    .filter(name => name.startsWith(`${service}-${env}:`))
+    .filter(name => name.startsWith(`${service}-${env}`))
     .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
-
-    console.log(`${service}-${env}:`);
-    console.log(filtered);
-
+ 
   const latestTag = filtered.length > 0 ? filtered[0] : null;
   let newVersion;
 
   if (latestTag) {
-    const version = latestTag.split(":")[1];
+    const parts = latestTag.split("-");
+    const version = parts[parts.length - 1];
     newVersion = bumpVersion(version, updateLevel);
   } else {
     newVersion = "1.0.0";
