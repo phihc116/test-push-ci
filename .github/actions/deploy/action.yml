@@ -75,6 +75,7 @@ runs:
           **Repo**<br>[${{ github.repository }}](${{ github.server_url }}/${{ github.repository }})
           **Actor**<br>${{ github.actor }}
           **Branch**<br>${{ github.ref_name }}
-          **Release**<br>${{ steps.bump.outputs.newTag }}
+          **Release**<br>{{NEW_TAG}}
       env:
         LARK_WEBHOOK: ${{ inputs.lark_webhook }}  
+        NEW_TAG: ${{ steps.bump.outputs.newTag }}
