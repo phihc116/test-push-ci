@@ -42,4 +42,4 @@ async function bumpTag({ github, context, service, env, updateLevel }) {
   return { latestTag, newTag };
 }
  
-export default bumpTag;
+module.exports = bumpTag;
