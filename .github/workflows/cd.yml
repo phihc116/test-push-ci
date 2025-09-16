@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v4      
       - uses: ./.github/actions/deploy
         with:
-          service: service_a
+          service: service-a
           environment: ${{ github.event.inputs.environment }}
           update_level: ${{ github.event.inputs.update_level }}
           docker_username: ${{ secrets.DOCKER_USERNAME }}
@@ -41,7 +41,7 @@ jobs:
         uses: actions/checkout@v4          
       - uses: ./.github/actions/deploy
         with:
-          service: service_b
+          service: service-b
           environment: ${{ github.event.inputs.environment }}
           update_level: ${{ github.event.inputs.update_level }}
           docker_username: ${{ secrets.DOCKER_USERNAME }}
