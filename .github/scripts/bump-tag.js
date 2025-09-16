@@ -32,12 +32,12 @@ export async function bumpTag({ github, context, service, env, updateLevel }) {
   console.log(`Latest tag: ${latestTag || "none"}`);
   console.log(`New tag: ${newTag}`);
 
-//   await github.rest.git.createRef({
-//     owner: context.repo.owner,
-//     repo: context.repo.repo,
-//     ref: `refs/tags/${newTag}`,
-//     sha: context.sha,
-//   });
+  await github.rest.git.createRef({
+    owner: context.repo.owner,
+    repo: context.repo.repo,
+    ref: `refs/tags/${newTag}`,
+    sha: context.sha,
+  });
 
   return { latestTag, newTag };
 }

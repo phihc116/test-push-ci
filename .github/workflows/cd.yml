@@ -5,16 +5,10 @@ on:
     inputs:
       environment:
         type: choice
-        options:
-          - dev
-          - staging
-          - prod
+        options: [dev, staging, prod]
       update_level:
         type: choice
-        options:
-          - major
-          - minor
-          - patch
+        options: [major, minor, patch]
       deploy_service_a:
         type: boolean
         default: true
@@ -27,55 +21,22 @@ jobs:
     if: ${{ github.event.inputs.deploy_service_a == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Service A
-        run: |
-          echo "Deploying Service A"
-          echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "Update level: ${{ github.event.inputs.update_level }}"
-      - name: Checkout repo
-        uses: actions/checkout@v4          
-      - name: Bump tag
-        id: bump
-        uses: actions/github-script@v8
+      - uses: ./.github/actions/deploy
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { bumpTag } = require('./.github/scripts/bump-tag.js');
-            const result = await bumpTag({
-              github,
-              context,
-              service: "service_a",
-              env: "${{ github.event.inputs.environment }}",
-              updateLevel: "${{ github.event.inputs.update_level }}"
-            });
-            core.setOutput("latestTag", result.latestTag);
-            core.setOutput("newTag", result.newTag);    
+          service: service_a
+          environment: ${{ github.event.inputs.environment }}
+          update_level: ${{ github.event.inputs.update_level }}
+          docker_username: ${{ secrets.DOCKER_USERNAME }}
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}
 
   service-b:
     if: ${{ github.event.inputs.deploy_service_b == 'true' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy Service B
-        run: |
-          echo "Deploying Service B"
-          echo "Environment: ${{ github.event.inputs.environment }}"
-          echo "Update level: ${{ github.event.inputs.update_level }}"
-      - name: Checkout repo
-        uses: actions/checkout@v4          
-      - name: Bump tag
-        id: bump
-        uses: actions/github-script@v8
+      - uses: ./.github/actions/deploy
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { bumpTag } = require('./.github/scripts/bump-tag.js');
-            console.log(bumpTag);
-            const result = await bumpTag({
-              github,
-              context,
-              service: "service_b",
-              env: "${{ github.event.inputs.environment }}",
-              updateLevel: "${{ github.event.inputs.update_level }}"
-            });
-            core.setOutput("latestTag", result.latestTag);
-            core.setOutput("newTag", result.newTag);         
+          service: service_b
+          environment: ${{ github.event.inputs.environment }}
+          update_level: ${{ github.event.inputs.update_level }}
+          docker_username: ${{ secrets.DOCKER_USERNAME }}
+          docker_password: ${{ secrets.DOCKER_PASSWORD }}
