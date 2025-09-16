@@ -33,7 +33,7 @@ jobs:
           environment: ${{ github.event.inputs.environment }}
           update_level: ${{ github.event.inputs.update_level }}
           docker_username: ${{ secrets.DOCKER_USERNAME }}
-          docker_password: ${{ secrets.DOCKER_PASSWORD }}
+          docker_password: ${{ secrets.DOCKER_TOKEN }}
           lark_webhook: ${{ secrets.LARK_WEBHOOK }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
           docker-file-path: './apps/service-a/Dockerfile'
@@ -50,7 +50,7 @@ jobs:
           environment: ${{ github.event.inputs.environment }}
           update_level: ${{ github.event.inputs.update_level }}
           docker_username: ${{ secrets.DOCKER_USERNAME }}
-          docker_password: ${{ secrets.DOCKER_PASSWORD }}
+          docker_password: ${{ secrets.DOCKER_TOKEN }}
           lark_webhook: ${{ secrets.LARK_WEBHOOK }}
           github_token: ${{ secrets.GITHUB_TOKEN }}          
           docker-file-path: './apps/service-b/Dockerfile'
