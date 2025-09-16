@@ -40,11 +40,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const bumpTag = require('./scripts/github-scripts/bump-tag.js');
+            const bumpTag = require('./scripts/bump-tag.js');
             const result = await bumpTag({
               github,
               context,
-              service: "deploy_service_a",
+              service: "service_a",
               env: "${{ github.event.inputs.environment }}",
               updateLevel: "${{ github.event.inputs.update_level }}"
             });
@@ -68,11 +68,11 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const bumpTag = require('./scripts/github-scripts/bump-tag.js');
+            const bumpTag = require('./scripts/bump-tag.js');
             const result = await bumpTag({
               github,
               context,
-              service: "deploy_service_a",
+              service: "service_b",
               env: "${{ github.event.inputs.environment }}",
               updateLevel: "${{ github.event.inputs.update_level }}"
             });
