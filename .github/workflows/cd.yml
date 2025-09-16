@@ -1,5 +1,10 @@
-name: Deployment
-run-name: "Deployment → ${{ github.event.inputs.environment }} (${{ github.event.inputs.update_level }})"
+name: Build and Push to Registry
+run-name: >
+  Deployment → Env: ${{ github.event.inputs.environment }},
+  Level: ${{ github.event.inputs.update_level }},
+  Services: 
+  ${{ github.event.inputs.deploy_service_a == 'true' && 'service A ' || '' }}
+  ${{ github.event.inputs.deploy_service_b == 'true' && 'service B' || '' }}
 on:
   workflow_dispatch:
     inputs:
