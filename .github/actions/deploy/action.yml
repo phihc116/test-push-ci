@@ -21,9 +21,6 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout repo
-      uses: actions/checkout@v4
-
     - name: Bump tag
       id: bump
       uses: actions/github-script@v8

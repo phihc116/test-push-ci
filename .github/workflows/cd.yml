@@ -21,6 +21,8 @@ jobs:
     if: ${{ github.event.inputs.deploy_service_a == 'true' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4      
       - uses: ./.github/actions/deploy
         with:
           service: service_a
@@ -33,6 +35,8 @@ jobs:
     if: ${{ github.event.inputs.deploy_service_b == 'true' }}
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4          
       - uses: ./.github/actions/deploy
         with:
           service: service_b
