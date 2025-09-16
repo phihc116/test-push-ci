@@ -58,3 +58,25 @@ runs:
         echo "- **Environment**: ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
         echo "- **New Tag**: \`${{ steps.bump.outputs.newTag }}\`" >> $GITHUB_STEP_SUMMARY
       shell: bash
+
+    - name: Notify Lark
+      uses: herondlabs/action-lark-notify@main
+      with:
+        columnsPerRow: 2
+        token: ${{ secrets.GITHUB_TOKEN }}
+        cardItems: |
+          **Repo**<br>[{{GITHUB_REPOSITORY}}]({{GITHUB_SERVER_URL}}/{{GITHUB_REPOSITORY}})
+          **Channel**<br>{{CHANNEL}}
+          **Actor**<br>{{GITHUB_ACTOR}} 
+          **Branch**<br>[{{BRANCH}}]({{GITHUB_SERVER_URL || 'https://github.com'}}/{{GITHUB_REPOSITORY}}/tree/{{BRANCH}})
+          **Build Logs**<br>[{{GITHUB_RUN_ID}}]({{GITHUB_JOB_URL}})
+          **Release**<br>[{{GITHUB_TAG_VERSION}}]({{GITHUB_SERVER_URL}}/{{GITHUB_REPOSITORY}}/releases/tag/{{GITHUB_TAG_VERSION}})
+      env:
+        LARK_WEBHOOK: ${{ secrets.LARK_WEBHOOK }}
+        LARK_MESSAGE_TITLE: "Build Browser For Windows"
+        LARK_MESSAGE_SUBTITLE: |
+          Status: ${{ needs.build_windows.result }}
+        LARK_MESSAGE_TEMPLATE: "${{ env.MSG_COLOR }}"
+        RELEASE_TAG: ${{ inputs.tag }}
+        CHANNEL: ${{ inputs.channel }}
+        BRANCH: ${{ inputs.core_branch || env.GITHUB_REF_NAME }}      
