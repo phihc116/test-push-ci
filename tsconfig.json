@@ -8,6 +8,30 @@
     },
     {
       "path": "./apps/service-a"
+    },
+    {
+      "path": "./apps/service-b-e2e"
+    },
+    {
+      "path": "./apps/service-b"
+    },
+    {
+      "path": "./apps/service-c-e2e"
+    },
+    {
+      "path": "./apps/service-c"
+    },
+    {
+      "path": "./apps/service-d-e2e"
+    },
+    {
+      "path": "./apps/service-d"
+    },
+    {
+      "path": "./apps/service-e-e2e"
+    },
+    {
+      "path": "./apps/service-e"
     }
   ]
 }

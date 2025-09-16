@@ -45,7 +45,7 @@
     "releaseTagPattern": "release/{projectName}/{version}",
     "groups": {
       "apps": {
-        "projects": ["@test-push-cd/service-a", "service-b", "service-c", "service-d", "service-e"],
+        "projects": ["@test-push-cd/service-a"],
         "projectsRelationship": "independent",
         "docker": {
           "skipVersionActions": true,
