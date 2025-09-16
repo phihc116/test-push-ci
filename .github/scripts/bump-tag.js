@@ -6,15 +6,13 @@ function bumpVersion(version, level) {
   return `${major}.${minor}.${patch}`;
 }
 
-export default async function ({ github, context, service, env, updateLevel }) {
-  // Get the latest tags from the repo
+async function bumpTag({ github, context, service, env, updateLevel }) {
   const { data: tags } = await github.rest.repos.listTags({
     owner: context.repo.owner,
     repo: context.repo.repo,
     per_page: 100,
   });
 
-  // Filter tags by naming convention
   const filtered = tags
     .map(t => t.name)
     .filter(name => name.startsWith(`${service}-${env}:`))
@@ -24,23 +22,24 @@ export default async function ({ github, context, service, env, updateLevel }) {
   let newVersion;
 
   if (latestTag) {
-    const version = latestTag.split(":")[1]; // part after colon
+    const version = latestTag.split(":")[1];
     newVersion = bumpVersion(version, updateLevel);
   } else {
-    newVersion = "1.0.0"; // default if no tag exists
+    newVersion = "1.0.0";
   }
 
   const newTag = `${service}-${env}:${newVersion}`;
   console.log(`Latest tag: ${latestTag || "none"}`);
   console.log(`New tag: ${newTag}`);
 
-  // Create a new Git tag ref
 //   await github.rest.git.createRef({
 //     owner: context.repo.owner,
 //     repo: context.repo.repo,
 //     ref: `refs/tags/${newTag}`,
-//     sha: context.sha, // tag the current commit
+//     sha: context.sha,
 //   });
 
   return { latestTag, newTag };
-};
+}
+ 
+export default bumpTag;
