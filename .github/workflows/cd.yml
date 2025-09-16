@@ -1,10 +1,7 @@
 name: Build and Push to Registry
 run-name: >
   Deployment → Env: ${{ github.event.inputs.environment }},
-  Level: ${{ github.event.inputs.update_level }},
-  Services: 
-  ${{ github.event.inputs.deploy_service_a == 'true' && 'service A ' || '' }}
-  ${{ github.event.inputs.deploy_service_b == 'true' && 'service B' || '' }}
+  Level: ${{ github.event.inputs.update_level }}
 on:
   workflow_dispatch:
     inputs:
@@ -39,6 +36,7 @@ jobs:
           docker_password: ${{ secrets.DOCKER_PASSWORD }}
           lark_webhook: ${{ secrets.LARK_WEBHOOK }}
           github_token: ${{ secrets.GITHUB_TOKEN }}
+          docker-file-path: './apps/service-a/Dockerfile'
 
   service-b:
     if: ${{ github.event.inputs.deploy_service_b == 'true' }}
@@ -55,3 +53,4 @@ jobs:
           docker_password: ${{ secrets.DOCKER_PASSWORD }}
           lark_webhook: ${{ secrets.LARK_WEBHOOK }}
           github_token: ${{ secrets.GITHUB_TOKEN }}          
+          docker-file-path: './apps/service-b/Dockerfile'
