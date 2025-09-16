@@ -17,6 +17,12 @@ inputs:
   docker_password:
     description: "Docker password"
     required: true
+  github_token:
+    description: "GitHub token"
+    required: true
+  lark_webhook:
+    description: "Lark webhook"
+    required: false    
 
 runs:
   using: "composite"
@@ -63,20 +69,11 @@ runs:
       uses: herondlabs/action-lark-notify@main
       with:
         columnsPerRow: 2
-        token: ${{ secrets.GITHUB_TOKEN }}
+        token: ${{ inputs.github_token }}
         cardItems: |
-          **Repo**<br>[{{GITHUB_REPOSITORY}}]({{GITHUB_SERVER_URL}}/{{GITHUB_REPOSITORY}})
-          **Channel**<br>{{CHANNEL}}
-          **Actor**<br>{{GITHUB_ACTOR}} 
-          **Branch**<br>[{{BRANCH}}]({{GITHUB_SERVER_URL || 'https://github.com'}}/{{GITHUB_REPOSITORY}}/tree/{{BRANCH}})
-          **Build Logs**<br>[{{GITHUB_RUN_ID}}]({{GITHUB_JOB_URL}})
-          **Release**<br>[{{GITHUB_TAG_VERSION}}]({{GITHUB_SERVER_URL}}/{{GITHUB_REPOSITORY}}/releases/tag/{{GITHUB_TAG_VERSION}})
+          **Repo**<br>[${{ github.repository }}](${{ github.server_url }}/${{ github.repository }})
+          **Actor**<br>${{ github.actor }}
+          **Branch**<br>${{ github.ref_name }}
+          **Release**<br>${{ steps.bump.outputs.newTag }}
       env:
-        LARK_WEBHOOK: ${{ secrets.LARK_WEBHOOK }}
-        LARK_MESSAGE_TITLE: "Build Browser For Windows"
-        LARK_MESSAGE_SUBTITLE: |
-          Status: ${{ needs.build_windows.result }}
-        LARK_MESSAGE_TEMPLATE: "${{ env.MSG_COLOR }}"
-        RELEASE_TAG: ${{ inputs.tag }}
-        CHANNEL: ${{ inputs.channel }}
-        BRANCH: ${{ inputs.core_branch || env.GITHUB_REF_NAME }}      
+        LARK_WEBHOOK: ${{ inputs.lark_webhook }}  
