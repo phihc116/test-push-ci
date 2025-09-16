@@ -1,5 +1,5 @@
 name: Deployment
-
+run-name: "Deployment → ${{ github.event.inputs.environment }} (${{ github.event.inputs.update_level }})"
 on:
   workflow_dispatch:
     inputs:

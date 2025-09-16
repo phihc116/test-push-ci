@@ -11,10 +11,8 @@ export async function bumpTag({ github, context, service, env, updateLevel }) {
     owner: context.repo.owner,
     repo: context.repo.repo,
     per_page: 100,
-  });
-
-  console.log(tags);
-
+  }); 
+  
   const filtered = tags
     .map(t => t.name)
     .filter(name => name.startsWith(`${service}-${env}`))

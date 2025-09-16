@@ -59,7 +59,7 @@ runs:
 
     - name: Add summary
       run: |
-        echo "### 🚀 Deployment Result" >> $GITHUB_STEP_SUMMARY
+        echo "### Deployment Result" >> $GITHUB_STEP_SUMMARY
         echo "- **Service**: ${{ inputs.service }}" >> $GITHUB_STEP_SUMMARY
         echo "- **Environment**: ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
         echo "- **New Tag**: \`${{ steps.bump.outputs.newTag }}\`" >> $GITHUB_STEP_SUMMARY
