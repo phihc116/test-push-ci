@@ -1,23 +1,26 @@
-name: Deploy Services
+name: Mixed inputs
 
 on:
   workflow_dispatch:
     inputs:
-      services:
-        description: "Select services to deploy"
-        required: true
+      name:
         type: choice
-        options:
-          - service-a
-          - service-b
-          - service-c
+        description: Who to greet
+        options: 
+        - monalisa
+        - cschleiden
+      message:
+        required: true
+      use-emoji:
+        type: boolean
+        description: Include 🎉🤣 emojis
+      environment:
+        type: environment
+
 jobs:
-  build:
+  greet:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Parse services
-        run: |
-          for service in $(echo "${{ github.event.inputs.services }}" | tr "," "\n"); do
-            echo "Building $service"
-            # call docker build or nx run here
-          done
+    - name: Send greeting
+      run: echo "${{ github.event.inputs.message }} ${{ fromJSON('["", "🥳"]')[github.event.inputs.use-emoji == 'true'] }} ${{ github.event.inputs.name }}"
