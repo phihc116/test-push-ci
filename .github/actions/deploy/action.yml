@@ -27,7 +27,7 @@ runs:
       with:
         github-token: ${{ github.token }}
         script: |
-          const bumpTag = require('./.github/scripts/bump-tag.js');
+          const {bumpTag} = require('./.github/scripts/bump-tag.js');
           const result = await bumpTag({
             github,
             context,
