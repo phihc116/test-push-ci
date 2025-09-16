@@ -66,6 +66,7 @@ runs:
       shell: bash
 
     - name: Notify Lark
+      if: always()
       uses: herondlabs/action-lark-notify@main
       with:
         columnsPerRow: 2
