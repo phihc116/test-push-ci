@@ -23,13 +23,22 @@ on:
         default: true
 
 jobs:
-  greet:
+  service-a:
+    if: ${{ github.event.inputs.deploy_service_a == 'true' }}
     runs-on: ubuntu-latest
-
     steps:
-      - name: Send greeting
-        run: | 
-          echo "${{ github.event.inputs.environment }}"
-          echo "${{ github.event.inputs.update_level }}"
-          echo "${{ github.event.inputs.deploy_service_a }}"
-          echo "${{ github.event.inputs.deploy_service_b }}"
+      - name: Deploy Service A
+        run: |
+          echo "Deploying Service A"
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Update level: ${{ github.event.inputs.update_level }}"
+
+  service-b:
+    if: ${{ github.event.inputs.deploy_service_b == 'true' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Service B
+        run: |
+          echo "Deploying Service B"
+          echo "Environment: ${{ github.event.inputs.environment }}"
+          echo "Update level: ${{ github.event.inputs.update_level }}"
