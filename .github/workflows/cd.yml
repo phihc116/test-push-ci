@@ -32,6 +32,12 @@ jobs:
           echo "Deploying Service A"
           echo "Environment: ${{ github.event.inputs.environment }}"
           echo "Update level: ${{ github.event.inputs.update_level }}"
+      - name: Run bump-tag.js
+        run: node .github/scripts/bump-tag.js
+        env:
+          SERVICE: "service-a"
+          ENVIRONMENT: ${{ github.event.inputs.environment }}
+          UPDATE_LEVEL: ${{ github.event.inputs.update_level }}      
 
   service-b:
     if: ${{ github.event.inputs.deploy_service_b == 'true' }}
@@ -42,3 +48,9 @@ jobs:
           echo "Deploying Service B"
           echo "Environment: ${{ github.event.inputs.environment }}"
           echo "Update level: ${{ github.event.inputs.update_level }}"
+      - name: Run bump-tag.js
+        run: node .github/scripts/bump-tag.js
+        env:
+          SERVICE: "service-b"
+          ENVIRONMENT: ${{ github.event.inputs.environment }}
+          UPDATE_LEVEL: ${{ github.event.inputs.update_level }}          
