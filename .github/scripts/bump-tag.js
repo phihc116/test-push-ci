@@ -14,11 +14,14 @@ export async function bumpTag({ github, context, service, env, updateLevel }) {
   });
 
   console.log(tags);
-  
+
   const filtered = tags
     .map(t => t.name)
     .filter(name => name.startsWith(`${service}-${env}:`))
     .sort((a, b) => b.localeCompare(a, undefined, { numeric: true }));
+
+    console.log(`${service}-${env}:`);
+    console.log(filtered);
 
   const latestTag = filtered.length > 0 ? filtered[0] : null;
   let newVersion;
