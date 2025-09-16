@@ -50,3 +50,10 @@ runs:
         context: ./services/${{ inputs.service }}
         push: true
         tags: ${{ inputs.docker_username }}/${{ inputs.service }}:${{ steps.bump.outputs.newTag }}
+
+    - name: Add summary
+      run: |
+        echo "### 🚀 Deployment Result" >> $GITHUB_STEP_SUMMARY
+        echo "- **Service**: ${{ inputs.service }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **Environment**: ${{ inputs.environment }}" >> $GITHUB_STEP_SUMMARY
+        echo "- **New Tag**: \`${{ steps.bump.outputs.newTag }}\`" >> $GITHUB_STEP_SUMMARY
