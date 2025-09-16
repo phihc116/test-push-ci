@@ -68,7 +68,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const bumpTag = require('./.github/scripts/bump-tag.js');
+            const { bumpTag } = require('./.github/scripts/bump-tag.js');
             console.log(bumpTag);
             const result = await bumpTag({
               github,
