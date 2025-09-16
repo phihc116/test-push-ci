@@ -28,7 +28,7 @@ export async function bumpTag({ github, context, service, env, updateLevel }) {
     newVersion = "1.0.0";
   }
 
-  const newTag = `${service}-${env}:${newVersion}`;
+  const newTag = `${service}-${env}-${newVersion}`;
   console.log(`Latest tag: ${latestTag || "none"}`);
   console.log(`New tag: ${newTag}`);
 
